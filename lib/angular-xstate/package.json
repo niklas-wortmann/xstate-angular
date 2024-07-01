@@ -1,0 +1,10 @@
+{
+  "name": "angular-xstate",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^18.0.0",
+    "@angular/core": "^18.0.0",
+    "xstate": "5.14.0"
+  },
+  "sideEffects": false
+}
