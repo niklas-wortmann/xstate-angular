@@ -12,7 +12,6 @@ import {
   Type,
   WritableSignal,
 } from '@angular/core';
-import { useSelector } from './useSelector';
 import { useActorRef } from './useActorRef';
 
 export function useActor<TLogic extends AnyActorLogic>(
@@ -26,10 +25,7 @@ export function useActor<TLogic extends AnyActorLogic>(
     public actorRef: Actor<TLogic>;
     private _snapshot: WritableSignal<SnapshotFrom<TLogic>>;
     public send: Actor<TLogic>['send'];
-
-    public get snapshot() {
-      return this._snapshot.asReadonly();
-    }
+    public snapshot: Signal<SnapshotFrom<TLogic>>;
 
     constructor() {
       const listener = (nextSnapshot: Snapshot<unknown>) => {
@@ -37,8 +33,9 @@ export function useActor<TLogic extends AnyActorLogic>(
       };
 
       this.actorRef = useActorRef(actorLogic, options, listener);
-      this._snapshot = signal(useSelector(this.actorRef as any, (s) => s)());
+      this._snapshot = signal(this.actorRef.getSnapshot());
       this.send = this.actorRef.send;
+      this.snapshot = this._snapshot.asReadonly();
     }
   }
   return ActorStore;

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, computed, inject, OnInit } from '@angular/core';
 import { TicTacToeSerice } from './ticTacToeMachine';
 import { TileComponent } from './tile.component';
 
@@ -6,7 +6,7 @@ import { TileComponent } from './tile.component';
   selector: 'tic-tac-toe-component',
   template: `<div class="root"> <div class="game">
       <h1>Tic-Tac-Toe</h1>
-      @if (ticTacToeService.snapshot().matches("gameOver")) {
+      @if (isWinner()) {
       <div>
         @if (ticTacToeService.snapshot().hasTag('winner')) {
         <h2>Winner: {{ ticTacToeService.snapshot().context.winner }}</h2>
@@ -34,6 +34,10 @@ import { TileComponent } from './tile.component';
 export class TicTacToeComponent {
   protected ticTacToeService = inject(TicTacToeSerice);
   protected board = this.range(0, 9);
+
+  protected isWinner = computed(() => {
+    return this.ticTacToeService.snapshot().matches('gameOver');
+  });
 
   private range(start: number, end: number) {
     return Array(end - start)

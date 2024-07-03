@@ -56,7 +56,6 @@ export class CounterComponent {
 
   constructor() {
     this.counterMachine.snapshot().context.count;
-    this.counterMachine.send({ type: 'INC' });
     this.counterMachine.send({ type: 'SET', value: 0 });
   }
 }
