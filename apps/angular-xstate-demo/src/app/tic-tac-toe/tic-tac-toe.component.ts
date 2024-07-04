@@ -3,7 +3,7 @@ import { TicTacToeSerice } from './ticTacToeMachine';
 import { TileComponent } from './tile.component';
 
 @Component({
-  selector: 'tic-tac-toe-component',
+  selector: 'app-tic-tac-toe-component',
   template: `<div class="root"> <div class="game">
       <h1>Tic-Tac-Toe</h1>
       @if (isWinner()) {
