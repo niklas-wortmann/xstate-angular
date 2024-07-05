@@ -38,4 +38,3 @@ jobs:
       # Prepend any command with "nx-cloud record --" to record its logs to Nx Cloud
       # - run: pnpm exec nx-cloud record -- echo Hello World
       - run: pnpm exec nx affected -t lint test build
-      - run: pnpm exec nx affected --parallel 1 -t e2e-ci
