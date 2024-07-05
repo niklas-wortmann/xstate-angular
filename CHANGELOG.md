@@ -1,3 +1,7 @@
+## 1.0.0-alpha.7 (2024-07-05)
+
+This was a version bump only, there were no code changes.
+
 ## 1.0.0-alpha.6 (2024-07-05)
 
 This was a version bump only, there were no code changes.
