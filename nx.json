@@ -16,11 +16,9 @@
   },
   "targetDefaults": {
     "nx-release-publish": {
-      "dependsOn": [
-        "build"
-      ],
+      "dependsOn": ["build"],
       "options": {
-        "packageRoot": "dist/{projectName}"
+        "packageRoot": "dist/{projectRoot}"
       }
     },
     "@angular-devkit/build-angular:application": {
@@ -89,7 +87,7 @@
   "release": {
     "version": {
       "generatorOptions": {
-        "packageRoot": "dist/{projectName}",
+        "packageRoot": "dist/{projectRoot}",
         "currentVersionResolver": "git-tag"
       }
     },
