@@ -1,9 +1,9 @@
 /* eslint-disable */
 export default {
-  displayName: 'angular-xstate',
+  displayName: 'xstate-ngx',
   preset: '../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
-  coverageDirectory: '../../coverage/lib/angular-xstate',
+  coverageDirectory: '../../coverage/lib/xstate-ngx',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

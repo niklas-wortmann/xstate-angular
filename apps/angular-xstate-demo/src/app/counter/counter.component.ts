@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { assign, setup } from 'xstate';
-import { useMachine } from 'angular-xstate';
+import { useMachine } from 'xstate-ngx';
 
 const countMachine = setup({
   types: {

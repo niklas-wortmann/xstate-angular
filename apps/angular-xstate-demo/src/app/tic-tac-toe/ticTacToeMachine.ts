@@ -1,5 +1,5 @@
 import { EventObject, createMachine, assign } from 'xstate';
-import { useMachine } from 'angular-xstate';
+import { useMachine } from 'xstate-ngx';
 
 function assertEvent<TEvent extends EventObject, Type extends TEvent['type']>(
   ev: TEvent,
