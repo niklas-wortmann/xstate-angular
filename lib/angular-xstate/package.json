@@ -1,6 +1,6 @@
 {
-  "name": "angular-xstate",
-  "version": "1.0.0-alpha.4",
+  "name": "xstate-ngx",
+  "version": "1.0.0-alpha.6",
   "keywords": [
     "state",
     "machine",

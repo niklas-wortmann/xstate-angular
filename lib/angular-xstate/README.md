@@ -1,4 +1,4 @@
-# xstate-angular
+# xstate-ngx
 
 This is just a POC while the [PR in the Xstate Monorepository](https://github.com/statelyai/xstate/pull/4816) is being discussed. Eventually this will be moved and deprecated!
 
@@ -9,10 +9,10 @@ This package contains utilities for using [XState](https://github.com/statelyai/
 
 ## Quick start
 
-1. Install `xstate` and `xstate-angular`:
+1. Install `xstate` and `xstate-ngx`:
 
 ```bash
-npm i xstate xstate-angular
+npm i xstate xstate-ngx
 ```
 
 2. Import the `useMachine` function:
