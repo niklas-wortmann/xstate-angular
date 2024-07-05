@@ -14,6 +14,14 @@ import {
 } from '@angular/core';
 import { useActorRef } from './useActorRef';
 
+/**
+ * Creates an Angular service that provides an instance of an actor store.
+ *
+ * @param actorLogic - The logic implementation for the actor.
+ * @param _options - Optional options to configure the actor store. Can include "providedIn" property to specify the Angular module where the service is provided.
+ *
+ * @return The Angular service that provides the actor store.
+ */
 export function useActor<TLogic extends AnyActorLogic>(
   actorLogic: TLogic,
   _options?: ActorOptions<TLogic> & { providedIn: 'root' }
