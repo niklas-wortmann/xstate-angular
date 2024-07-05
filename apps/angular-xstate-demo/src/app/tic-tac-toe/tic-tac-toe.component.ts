@@ -1,4 +1,4 @@
-import { Component, computed, inject, OnInit } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
 import { TicTacToeSerice } from './ticTacToeMachine';
 import { TileComponent } from './tile.component';
 
