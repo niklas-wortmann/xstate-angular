@@ -18,7 +18,7 @@ npm i xstate xstate-ngx
 2. Import the `useMachine` function:
 
 ```angular-ts
-import { useMachine } from 'xstate-angular';
+import { useMachine } from 'xstate-ngx';
 import { createMachine } from 'xstate';
 import {Component, inject} from '@angular/core';
 const toggleMachine = createMachine({
