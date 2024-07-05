@@ -1,9 +1,29 @@
 {
   "name": "angular-xstate",
-  "version": "1.0.0-alpha",
-  "peerDependencies": {
-    "@angular/core": "^18.0.0",
-    "xstate": "5.14.0"
+  "version": "1.0.0-alpha.0",
+  "keywords": [
+    "state",
+    "machine",
+    "statechart",
+    "scxml",
+    "state",
+    "graph",
+    "angular",
+    "signals"
+  ],
+  "homepage": "https://github.com/niklas-wortmann/xstate-angular#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/niklas-wortmann/xstate-angular.git"
   },
+  "scripts": {},
+  "bugs": {
+    "url": "https://github.com/niklas-wortmann/xstate-angular/issues"
+  },
+  "peerDependencies": {
+    "@angular/core": ">17.0.0",
+    "xstate": "^5.11.0"
+  },
+  "license": "MIT",
   "sideEffects": false
 }
