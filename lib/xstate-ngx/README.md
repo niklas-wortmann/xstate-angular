@@ -52,3 +52,34 @@ export class ToggleComponent {
   public toggleMachine = inject(ToggleMachine);
 }
 ```
+
+## API
+
+### `useActor(actorLogic, options?)`
+
+**Returns** `{ snapshot, send, actorRef }`:
+
+- `snapshot` - Represents the current snapshot (state) of the machine as an XState `State` object.  Returns a Signal.
+- `send` - A function that sends events to the running actor.
+- `actorRef` - The created actor ref.
+- `matches` - indicating whether the provided path matches the machine snapshot.
+- `hasTag` - machine or machine snapshot has the specified tag.
+- `can` -  path can be transitioned to in the state machine
+
+### `useMachine(machine, options?)`
+
+A function that returns an Injectable that creates an actor from the given `machine` and starts an actor that runs for the lifetime of the component or DI context.
+
+#### Arguments
+
+- `machine` - An [XState machine](https://stately.ai/docs/machines)
+- `options` (optional) - Actor options
+
+**Returns** `{ snapshot, send, actorRef }`:
+
+- `snapshot` - Represents the current snapshot (state) of the machine as an XState `State` object.  Returns a Signal.
+- `send` - A function that sends events to the running actor.
+- `actorRef` - The created actor ref.
+- `matches` - indicating whether the provided path matches the machine snapshot.
+- `hasTag` - machine or machine snapshot has the specified tag.
+- `can` -  path can be transitioned to in the state machine

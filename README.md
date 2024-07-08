@@ -62,10 +62,13 @@ export class ToggleComponent {
 - `snapshot` - Represents the current snapshot (state) of the machine as an XState `State` object.  Returns a Signal.
 - `send` - A function that sends events to the running actor.
 - `actorRef` - The created actor ref.
+- `matches` - indicating whether the provided path matches the machine snapshot.
+- `hasTag` - machine or machine snapshot has the specified tag.
+- `can` -  path can be transitioned to in the state machine
 
 ### `useMachine(machine, options?)`
 
-A [Vue composition function](https://v3.vuejs.org/guide/composition-api-introduction.html) that creates an actor from the given `machine` and starts an actor that runs for the lifetime of the component.
+A function that returns an Injectable that creates an actor from the given `machine` and starts an actor that runs for the lifetime of the component or DI context.
 
 #### Arguments
 
@@ -74,6 +77,9 @@ A [Vue composition function](https://v3.vuejs.org/guide/composition-api-introduc
 
 **Returns** `{ snapshot, send, actorRef }`:
 
-- `snapshot` - Represents the current snapshot (state) of the machine as an XState `State` object. Returns a Signal.
+- `snapshot` - Represents the current snapshot (state) of the machine as an XState `State` object.  Returns a Signal.
 - `send` - A function that sends events to the running actor.
 - `actorRef` - The created actor ref.
+- `matches` - indicating whether the provided path matches the machine snapshot.
+- `hasTag` - machine or machine snapshot has the specified tag.
+- `can` -  path can be transitioned to in the state machine
