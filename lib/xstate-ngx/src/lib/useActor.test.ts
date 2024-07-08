@@ -8,6 +8,7 @@ describe('xstate-angular', () => {
     initial: 'inactive',
     states: {
       inactive: {
+        tags: ['inactive'],
         on: {
           TOGGLE: 'active',
         },
@@ -43,5 +44,23 @@ describe('xstate-angular', () => {
     expect(store1.snapshot().value).toBe('inactive');
     store1.send({ type: 'TOGGLE' });
     expect(store1.snapshot().value).toBe('active');
+  });
+
+  it('can should be directly exposed', () => {
+    const ToggleActor = useActor(machine, { providedIn: 'root' });
+    const store1 = TestBed.inject(ToggleActor);
+    expect(store1.can({ type: 'TOGGLE' })()).toBe(true);
+  });
+
+  it('hasTag should be directly exposed', () => {
+    const ToggleActor = useActor(machine, { providedIn: 'root' });
+    const store1 = TestBed.inject(ToggleActor);
+    expect(store1.hasTag('inactive')()).toBe(true);
+  });
+
+  it('matches should be directly exposed', () => {
+    const ToggleActor = useActor(machine, { providedIn: 'root' });
+    const store1 = TestBed.inject(ToggleActor);
+    expect(store1.matches('inactive')()).toBe(true);
   });
 });
