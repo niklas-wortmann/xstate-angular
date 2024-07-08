@@ -6,11 +6,11 @@ import { TileComponent } from './tile.component';
   selector: 'app-tic-tac-toe-component',
   template: `<div class="root"> <div class="game">
       <h1>Tic-Tac-Toe</h1>
-      @if (isWinner()) {
+      @if (hasWinner()) {
       <div>
-        @if (ticTacToeService.snapshot().hasTag('winner')) {
+        @if (isWinner()) {
         <h2>Winner: {{ ticTacToeService.snapshot().context.winner }}</h2>
-        } @else if (ticTacToeService.snapshot().hasTag("draw")) {
+        } @else if (isDraw()) {
         <h2>Draw</h2>
         }
         <button (click)="ticTacToeService.send({ type: 'RESET' })">
@@ -35,9 +35,9 @@ export class TicTacToeComponent {
   protected ticTacToeService = inject(TicTacToeSerice);
   protected board = this.range(0, 9);
 
-  protected isWinner = computed(() => {
-    return this.ticTacToeService.snapshot().matches('gameOver');
-  });
+  protected hasWinner = this.ticTacToeService.matches('gameOver');
+  protected isWinner = this.ticTacToeService.hasTag('winner');
+  protected isDraw = this.ticTacToeService.hasTag('draw');
 
   private range(start: number, end: number) {
     return Array(end - start)
