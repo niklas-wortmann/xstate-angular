@@ -1,26 +1,55 @@
-import { ActorRef, SnapshotFrom } from 'xstate';
-import { computed, Signal, signal } from '@angular/core';
+import { Signal, effect, isSignal, signal } from '@angular/core';
+import type { AnyActorRef } from 'xstate';
 
 function defaultCompare<T>(a: T, b: T) {
   return a === b;
 }
 
-export function useSelector<TActor extends ActorRef<any, any> | undefined, T>(
-  actor: TActor,
+const noop = () => {
+  /* ... */
+};
+
+export const useSelector = <
+  TActor extends Pick<AnyActorRef, 'getSnapshot' | 'subscribe'>,
+  T
+>(
+  actor: TActor | Signal<TActor>,
   selector: (
-    snapshot: TActor extends ActorRef<any, any>
-      ? SnapshotFrom<TActor>
+    snapshot: TActor extends { getSnapshot(): infer TSnapshot }
+      ? TSnapshot
       : undefined
   ) => T,
   compare: (a: T, b: T) => boolean = defaultCompare
-): Signal<T> {
-  const actorRefRef = signal(actor);
-  return computed(
-    () => {
-      const actorRef = actorRefRef();
-      const snapshot = actorRef?.getSnapshot();
-      return selector(snapshot);
+) => {
+  const actorRefRef = isSignal(actor) ? actor : signal(actor);
+  const selected = signal(selector(actorRefRef()?.getSnapshot()));
+
+  const updateSelectedIfChanged = (nextSelected: T) => {
+    if (!compare(selected(), nextSelected)) {
+      selected.set(nextSelected);
+    }
+  };
+
+  effect(
+    (onCleanup) => {
+      const newActor = actorRefRef();
+      selected.set(selector(newActor?.getSnapshot()));
+      if (!newActor) {
+        return;
+      }
+      const sub = newActor.subscribe({
+        next: (emitted) => {
+          updateSelectedIfChanged(selector(emitted));
+        },
+        error: noop,
+        complete: noop,
+      });
+      onCleanup(() => sub.unsubscribe());
     },
-    { equal: compare }
+    {
+      allowSignalWrites: true,
+    }
   );
-}
+
+  return selected;
+};
