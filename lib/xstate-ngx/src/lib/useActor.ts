@@ -27,7 +27,7 @@ import type { AnyMachineSnapshot } from 'xstate/dist/declarations/src/types';
  */
 export function useActor<TLogic extends AnyActorLogic>(
   actorLogic: TLogic,
-  _options?: ActorOptions<TLogic> & { providedIn: 'root' }
+  _options?: ActorOptions<TLogic> & { providedIn?: 'root' }
 ): Type<ActorStoreProps<TLogic>> {
   const { providedIn, ...options } = _options ?? {};
 
