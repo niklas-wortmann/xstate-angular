@@ -26,7 +26,7 @@ import type { AnyMachineSnapshot } from 'xstate/dist/declarations/src/types';
  * @return The Angular service that provides the actor store.
  */
 export function useActor<TLogic extends AnyActorLogic>(
-  actorLogic: TLogic,
+  actorLogic: TLogic | (() => TLogic),
   _options?: ActorOptions<TLogic> & { providedIn: 'root' }
 ): Type<ActorStoreProps<TLogic>> {
   const { providedIn, ...options } = _options ?? {};
@@ -44,8 +44,9 @@ export function useActor<TLogic extends AnyActorLogic>(
       const listener = (nextSnapshot: Snapshot<unknown>) => {
         this._snapshot?.set(nextSnapshot as any);
       };
+      const resolvedLogic = actorLogic instanceof Function ? actorLogic() : actorLogic;
 
-      this.actorRef = useActorRef(actorLogic, options, listener);
+      this.actorRef = useActorRef(resolvedLogic, options, listener);
       this._snapshot = signal(this.actorRef.getSnapshot());
       this.send = this.actorRef.send;
       this.snapshot = this._snapshot.asReadonly();
