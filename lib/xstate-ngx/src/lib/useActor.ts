@@ -5,17 +5,21 @@ import {
   isMachineSnapshot,
   Snapshot,
   SnapshotFrom,
+  AnyMachineSnapshot,
+  EventFromLogic,
 } from 'xstate';
 import {
   computed,
+  inject,
   Injectable,
+  Injector,
+  runInInjectionContext,
   Signal,
   signal,
   Type,
   WritableSignal,
 } from '@angular/core';
 import { useActorRef } from './useActorRef';
-import type { AnyMachineSnapshot } from 'xstate/dist/declarations/src/types';
 
 /**
  * Creates an Angular service that provides an instance of an actor store.
@@ -36,6 +40,7 @@ export function useActor<TLogic extends AnyActorLogic>(
     public actorRef: Actor<TLogic>;
     public send: Actor<TLogic>['send'];
     public snapshot: Signal<SnapshotFrom<TLogic>>;
+    private injector = inject(Injector);
 
     private _isMachine = true;
     private _snapshot: WritableSignal<SnapshotFrom<TLogic>>;
@@ -47,7 +52,8 @@ export function useActor<TLogic extends AnyActorLogic>(
 
       this.actorRef = useActorRef(actorLogic, options, listener);
       this._snapshot = signal(this.actorRef.getSnapshot());
-      this.send = this.actorRef.send;
+      this.send = (event: EventFromLogic<TLogic>) =>
+        runInInjectionContext(this.injector, () => this.actorRef.send(event));
       this.snapshot = this._snapshot.asReadonly();
       this._isMachine = isMachineSnapshot(this.snapshot());
     }
