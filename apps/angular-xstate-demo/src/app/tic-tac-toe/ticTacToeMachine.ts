@@ -1,5 +1,5 @@
 import { EventObject, createMachine, assign } from 'xstate';
-import { useMachine } from 'xstate-ngx';
+import { useActor, useMachine } from 'xstate-ngx';
 
 function assertEvent<TEvent extends EventObject, Type extends TEvent['type']>(
   ev: TEvent,
@@ -128,4 +128,4 @@ export const ticTacToeMachine = createMachine(
   }
 );
 
-export const TicTacToeSerice = useMachine(ticTacToeMachine);
+export const TicTacToeSerice = useActor(ticTacToeMachine);
