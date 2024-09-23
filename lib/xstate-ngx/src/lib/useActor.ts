@@ -31,7 +31,7 @@ import { useActorRef } from './useActorRef';
  */
 export function useActor<TLogic extends AnyActorLogic>(
   actorLogic: TLogic,
-  _options?: ActorOptions<TLogic> & { providedIn: 'root' }
+  _options?: ActorOptions<TLogic> & { providedIn?: 'root' }
 ): Type<ActorStoreProps<TLogic>> {
   const { providedIn, ...options } = _options ?? {};
 
